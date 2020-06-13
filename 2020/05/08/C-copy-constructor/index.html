@@ -124,7 +124,7 @@
 
 
 
-  <title>勉之勉之</title>
+  <title>C++ copy constructor | 勉之勉之</title>
   
 
 
@@ -143,8 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,9 +226,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -259,9 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/08/C-copy-constructor/" itemprop="url">C++ copy constructor</a></h1>
+          <h1 class="post-title" itemprop="name headline">C++ copy constructor</h1>
         
 
         <div class="post-meta">
@@ -331,9 +328,7 @@
       
 
       
-        
-          
-            <h2 id="C-中的默认拷贝构造函数"><a href="#C-中的默认拷贝构造函数" class="headerlink" title="C++ 中的默认拷贝构造函数"></a>C++ 中的默认拷贝构造函数</h2><p>C++在类中没有定义拷贝构造函数的时候，编译器会默认提供一个拷贝构造函数，进行成员变量之间的拷贝（浅拷贝）。但其实并不完全是这样的，《深入探索C++对象模型》中对于拷贝构造函数有这么一段描述：</p>
+        <h2 id="C-中的默认拷贝构造函数"><a href="#C-中的默认拷贝构造函数" class="headerlink" title="C++ 中的默认拷贝构造函数"></a>C++ 中的默认拷贝构造函数</h2><p>C++在类中没有定义拷贝构造函数的时候，编译器会默认提供一个拷贝构造函数，进行成员变量之间的拷贝（浅拷贝）。但其实并不完全是这样的，《深入探索C++对象模型》中对于拷贝构造函数有这么一段描述：</p>
 <blockquote>
 <p> Default constructors 和 copy constructors 在必要的时候才由编译器产生出来。</p>
 <p> 这个句子中的“必要”意指当class不展示bitwise copy semantics时。</p>
@@ -343,8 +338,6 @@
 <figure class="highlight plain"><figcaption><span>-emit-llvm main.cpp -S -o main.ll```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">中间层的结果如下：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96; llvm</span><br><span class="line">; ModuleID &#x3D; &#39;main.cpp&#39;</span><br><span class="line">target datalayout &#x3D; &quot;e-m:e-i64:64-f80:128-n8:16:32:64-S128&quot;</span><br><span class="line">target triple &#x3D; &quot;x86_64-pc-linux-gnu&quot;</span><br><span class="line"></span><br><span class="line">%&quot;class.std::ios_base::Init&quot; &#x3D; type &#123; i8 &#125;</span><br><span class="line">%class.CTA &#x3D; type &#123; i32, i8* &#125;</span><br><span class="line"></span><br><span class="line">@_ZStL8__ioinit &#x3D; internal global %&quot;class.std::ios_base::Init&quot; zeroinitializer, align 1</span><br><span class="line">@__dso_handle &#x3D; external global i8</span><br><span class="line">@llvm.global_ctors &#x3D; appending global [1 x &#123; i32, void ()*, i8* &#125;] [&#123; i32, void ()*, i8* &#125; &#123; i32 65535, void ()* @_GLOBAL__sub_I_main.cpp, i8* null &#125;]</span><br><span class="line"></span><br><span class="line">; Function Attrs: uwtable</span><br><span class="line">define internal void @__cxx_global_var_init() #0 section &quot;.text.startup&quot; &#123;</span><br><span class="line">  call void @_ZNSt8ios_base4InitC1Ev(%&quot;class.std::ios_base::Init&quot;* @_ZStL8__ioinit)</span><br><span class="line">  %1 &#x3D; call i32 @__cxa_atexit(void (i8*)* bitcast (void (%&quot;class.std::ios_base::Init&quot;*)* @_ZNSt8ios_base4InitD1Ev to void (i8*)*), i8* getelementptr inbounds (%&quot;class.std::ios_base::Init&quot;, %&quot;class.std::ios_base::Init&quot;* @_ZStL8__ioinit, i32 0, i32 0), i8* @__dso_handle) #2</span><br><span class="line">  ret void</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">declare void @_ZNSt8ios_base4InitC1Ev(%&quot;class.std::ios_base::Init&quot;*) #1</span><br><span class="line"></span><br><span class="line">declare void @_ZNSt8ios_base4InitD1Ev(%&quot;class.std::ios_base::Init&quot;*) #1</span><br><span class="line"></span><br><span class="line">; Function Attrs: nounwind</span><br><span class="line">declare i32 @__cxa_atexit(void (i8*)*, i8*, i8*) #2</span><br><span class="line"></span><br><span class="line">; Function Attrs: norecurse nounwind uwtable</span><br><span class="line">define i32 @main() #3 &#123;</span><br><span class="line">  %1 &#x3D; alloca i32, align 4</span><br><span class="line">  %oTA &#x3D; alloca %class.CTA, align 8</span><br><span class="line">  %oTA2 &#x3D; alloca %class.CTA, align 8</span><br><span class="line">  store i32 0, i32* %1, align 4</span><br><span class="line">  %2 &#x3D; bitcast %class.CTA* %oTA to i8*</span><br><span class="line">  call void @llvm.memset.p0i8.i64(i8* %2, i8 0, i64 16, i32 8, i1 false)</span><br><span class="line">  %3 &#x3D; bitcast %class.CTA* %oTA2 to i8*</span><br><span class="line">  %4 &#x3D; bitcast %class.CTA* %oTA to i8*</span><br><span class="line">  call void @llvm.memcpy.p0i8.p0i8.i64(i8* %3, i8* %4, i64 16, i32 8, i1 false)</span><br><span class="line">  ret i32 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">; Function Attrs: argmemonly nounwind</span><br><span class="line">declare void @llvm.memset.p0i8.i64(i8* nocapture, i8, i64, i32, i1) #4</span><br><span class="line"></span><br><span class="line">; Function Attrs: argmemonly nounwind</span><br><span class="line">declare void @llvm.memcpy.p0i8.p0i8.i64(i8* nocapture, i8* nocapture readonly, i64, i32, i1) #4</span><br><span class="line"></span><br><span class="line">; Function Attrs: uwtable</span><br><span class="line">define internal void @_GLOBAL__sub_I_main.cpp() #0 section &quot;.text.startup&quot; &#123;</span><br><span class="line">  call void @__cxx_global_var_init()</span><br><span class="line">  ret void</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">attributes #0 &#x3D; &#123; uwtable &quot;disable-tail-calls&quot;&#x3D;&quot;false&quot; &quot;less-precise-fpmad&quot;&#x3D;&quot;false&quot; &quot;no-frame-pointer-elim&quot;&#x3D;&quot;true&quot; &quot;no-frame-pointer-elim-non-leaf&quot; &quot;no-infs-fp-math&quot;&#x3D;&quot;false&quot; &quot;no-nans-fp-math&quot;&#x3D;&quot;false&quot; &quot;stack-protector-buffer-size&quot;&#x3D;&quot;8&quot; &quot;target-cpu&quot;&#x3D;&quot;x86-64&quot; &quot;target-features&quot;&#x3D;&quot;+fxsr,+mmx,+sse,+sse2&quot; &quot;unsafe-fp-math&quot;&#x3D;&quot;false&quot; &quot;use-soft-float&quot;&#x3D;&quot;false&quot; &#125;</span><br><span class="line">attributes #1 &#x3D; &#123; &quot;disable-tail-calls&quot;&#x3D;&quot;false&quot; &quot;less-precise-fpmad&quot;&#x3D;&quot;false&quot; &quot;no-frame-pointer-elim&quot;&#x3D;&quot;true&quot; &quot;no-frame-pointer-elim-non-leaf&quot; &quot;no-infs-fp-math&quot;&#x3D;&quot;false&quot; &quot;no-nans-fp-math&quot;&#x3D;&quot;false&quot; &quot;stack-protector-buffer-size&quot;&#x3D;&quot;8&quot; &quot;target-cpu&quot;&#x3D;&quot;x86-64&quot; &quot;target-features&quot;&#x3D;&quot;+fxsr,+mmx,+sse,+sse2&quot; &quot;unsafe-fp-math&quot;&#x3D;&quot;false&quot; &quot;use-soft-float&quot;&#x3D;&quot;false&quot; &#125;</span><br><span class="line">attributes #2 &#x3D; &#123; nounwind &#125;</span><br><span class="line">attributes #3 &#x3D; &#123; norecurse nounwind uwtable &quot;disable-tail-calls&quot;&#x3D;&quot;false&quot; &quot;less-precise-fpmad&quot;&#x3D;&quot;false&quot; &quot;no-frame-pointer-elim&quot;&#x3D;&quot;true&quot; &quot;no-frame-pointer-elim-non-leaf&quot; &quot;no-infs-fp-math&quot;&#x3D;&quot;false&quot; &quot;no-nans-fp-math&quot;&#x3D;&quot;false&quot; &quot;stack-protector-buffer-size&quot;&#x3D;&quot;8&quot; &quot;target-cpu&quot;&#x3D;&quot;x86-64&quot; &quot;target-features&quot;&#x3D;&quot;+fxsr,+mmx,+sse,+sse2&quot; &quot;unsafe-fp-math&quot;&#x3D;&quot;false&quot; &quot;use-soft-float&quot;&#x3D;&quot;false&quot; &#125;</span><br><span class="line">attributes #4 &#x3D; &#123; argmemonly nounwind &#125;</span><br><span class="line"></span><br><span class="line">!llvm.ident &#x3D; !&#123;!0&#125;</span><br><span class="line"></span><br><span class="line">!0 &#x3D; !&#123;!&quot;clang version 3.8.0-2ubuntu4 (tags&#x2F;RELEASE_380&#x2F;final)&quot;&#125;</span><br></pre></td></tr></table></figure>
 <p>其中并没有构造出默认拷贝构造函数，调用拷贝构造函数的地方，36、37行，可以看到对于<code>int</code>是直接调用的<code>memset</code>来构造的，而对于<code>char*</code>则是直接调用的<code>memcpy</code>来做的。</p>
 
-          
-        
       
     </div>
     
@@ -359,144 +352,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dreamcxy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="勉之勉之">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/08/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-08T16:14:08+08:00">2020-05-08</time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/C/" rel="tag"># C++</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/08/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -506,10 +391,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -517,6 +403,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -537,8 +427,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -598,6 +497,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-中的默认拷贝构造函数"><span class="nav-number">1.</span> <span class="nav-text">C++ 中的默认拷贝构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Default-Memberwise-Initialization"><span class="nav-number">1.0.1.</span> <span class="nav-text">Default Memberwise Initialization</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -720,6 +635,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
 
   
 
