@@ -75,15 +75,15 @@
 
 
 
-<meta name="description" content="C++ 中的默认拷贝构造函数C++在类中没有定义拷贝构造函数的时候，编译器会默认提供一个拷贝构造函数，进行成员变量之间的拷贝（浅拷贝）。但其实并不完全是这样的，《深入探索C++对象模型》中对于拷贝构造函数有这么一段描述：   Default constructors 和 copy constructors 在必要的时候才由编译器产生出来。  这个句子中的“必要”意指当class不展示bitwise">
+<meta name="description" content="C++ 几种传递方式探讨传递方式 值传递 引用传递 指针传递 全局变量传递（其实是指两个函数可以访问到这个变量就行，比如类中的成员变量传递，或者使用static关键字去定义传递，或者用namepace去做，虽叫全局实非全局，这个效率在四者之间的效率是为最高）  比较功能上 值传递只是传递实参的拷贝，实参本身不改变  传递效率（被调用函数代码将实参传递到被调函数体内的过程） 这个其实跟传递的对象尺寸">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ copy constructor">
-<meta property="og:url" content="http://yoursite.com/2020/05/08/C-copy-constructor/index.html">
+<meta property="og:title" content="C++ 传递方式对比">
+<meta property="og:url" content="http://yoursite.com/2020/07/02/C-%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/index.html">
 <meta property="og:site_name" content="勉之勉之">
-<meta property="og:description" content="C++ 中的默认拷贝构造函数C++在类中没有定义拷贝构造函数的时候，编译器会默认提供一个拷贝构造函数，进行成员变量之间的拷贝（浅拷贝）。但其实并不完全是这样的，《深入探索C++对象模型》中对于拷贝构造函数有这么一段描述：   Default constructors 和 copy constructors 在必要的时候才由编译器产生出来。  这个句子中的“必要”意指当class不展示bitwise">
+<meta property="og:description" content="C++ 几种传递方式探讨传递方式 值传递 引用传递 指针传递 全局变量传递（其实是指两个函数可以访问到这个变量就行，比如类中的成员变量传递，或者使用static关键字去定义传递，或者用namepace去做，虽叫全局实非全局，这个效率在四者之间的效率是为最高）  比较功能上 值传递只是传递实参的拷贝，实参本身不改变  传递效率（被调用函数代码将实参传递到被调函数体内的过程） 这个其实跟传递的对象尺寸">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-08T08:53:25.000Z">
-<meta property="article:modified_time" content="2020-05-25T07:41:04.450Z">
+<meta property="article:published_time" content="2020-07-02T07:56:58.000Z">
+<meta property="article:modified_time" content="2020-07-02T07:57:27.730Z">
 <meta property="article:author" content="dreamcxy">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/08/C-copy-constructor/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/07/02/C-传递方式对比/"/>
 
 
 
@@ -228,6 +228,158 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/02/C-%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dreamcxy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="勉之勉之">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/02/C-%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/" itemprop="url">C++ 传递方式对比</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-02T15:56:58+08:00">2020-07-02</time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="C-几种传递方式探讨"><a href="#C-几种传递方式探讨" class="headerlink" title="C++ 几种传递方式探讨"></a>C++ 几种传递方式探讨</h2><h3 id="传递方式"><a href="#传递方式" class="headerlink" title="传递方式"></a>传递方式</h3><ul>
+<li>值传递</li>
+<li>引用传递</li>
+<li>指针传递</li>
+<li>全局变量传递（其实是指两个函数可以访问到这个变量就行，比如类中的成员变量传递，或者使用static关键字去定义传递，或者用namepace去做，虽叫全局实非全局，这个效率在四者之间的效率是为最高）</li>
+</ul>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><h4 id="功能上"><a href="#功能上" class="headerlink" title="功能上"></a>功能上</h4><ul>
+<li>值传递只是传递实参的拷贝，实参本身不改变</li>
+</ul>
+<h4 id="传递效率（被调用函数代码将实参传递到被调函数体内的过程）"><a href="#传递效率（被调用函数代码将实参传递到被调函数体内的过程）" class="headerlink" title="传递效率（被调用函数代码将实参传递到被调函数体内的过程）"></a>传递效率（被调用函数代码将实参传递到被调函数体内的过程）</h4><ul>
+<li>这个其实跟传递的对象尺寸有关，指针传递反正就是指针的大小，32位CPU 4字节， 64位CPU 8字节，而值的大小完全看参数了。引用传递最显然的实现方式是使用指针做的，但有些情况下编译器可以直接做到直接寻址的方式来做，这种情况下，效率跟上面的全局变量传递最快。</li>
+<li>如果是自定义类型的话，传值的话，生成临时对象的时候会执行构造函数，销毁时又要执行析构函数，如果成员比较多，构造和析构做的事有比较多，效率上大打折扣，远不如其他两种传递方式。当然，这种情况下，引用传递也是有可能做到直接寻址的，所以最优的还是引用传递，毕竟它最差也就是指针传递的效率了。</li>
+</ul>
+<h4 id="执行效率（被调用函数体内执行的效率）"><a href="#执行效率（被调用函数体内执行的效率）" class="headerlink" title="执行效率（被调用函数体内执行的效率）"></a>执行效率（被调用函数体内执行的效率）</h4><ul>
+<li>值传递复制到被调用函数体内之后，生成临时对象之后，函数流程都是直接的直接寻址做的，所以最快，指针和大多数情况下的引用都是走的间接寻址的方式。所以如果函数体内对变量操作频繁，大多数的引用和指针都会有明显的的效率丢失。</li>
+</ul>
+<h4 id="类型安全"><a href="#类型安全" class="headerlink" title="类型安全"></a>类型安全</h4><ul>
+<li><p>值传递和引用传递的过程中都会有强类型检查，所以安全，但指针传递类型检查较弱，如果是这种</p>
+<p><code>test(void *)</code>    的，那么只要是指针就是合法的。</p>
+</li>
+<li><p>但在多态的情况下，如果形参是父类，实参是子类，值传递会只构造父类的部分。</p>
+</li>
+</ul>
+<h4 id="参数检查"><a href="#参数检查" class="headerlink" title="参数检查"></a>参数检查</h4><ul>
+<li><strong>对内建的数据类型走值传递，自定义的请使用引用传递</strong></li>
+</ul>
+<h4 id="灵活性"><a href="#灵活性" class="headerlink" title="灵活性"></a>灵活性</h4><ul>
+<li>指针最灵活</li>
+</ul>
+<h3 id="共有技术"><a href="#共有技术" class="headerlink" title="共有技术"></a>共有技术</h3><h4 id="const"><a href="#const" class="headerlink" title="const"></a>const</h4><ul>
+<li>不允许修改</li>
+</ul>
+<h4 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h4><ul>
+<li>我觉得特别好用，真的，特别是你接手前人的代码，需要扩展某个函数的时候，这时候用默认值，可以帮你省去大量的重写，不知道为什么C#会去掉这个特性</li>
+</ul>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -694,7 +846,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
